@@ -11,7 +11,9 @@
 	<!--[if lt IE 8]>
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
-
+<link href="http://emtrics.com/stylesheets/master-458afbcd.css" media="screen" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="http://localhost/opinio/css/home.css">
+<link rel="shortcut icon" href="http://emtrics.com/images/favicon/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 
@@ -29,11 +31,16 @@
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
+				array('label'=>'Inicio', 'url'=>array('/site/index'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Puntos Opinion', 'url'=>array('/puntos/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Preguntas', 'url'=>array('/preguntas/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Opiniones', 'url'=>array('/respuestas/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Categorias', 'url'=>array('/categorias/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Formularios', 'url'=>array('/formularios/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Usuarios', 'url'=>array('/usuarios/admin'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Registro', 'url'=>array('/usuarios/create'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				array('label'=>'Logout ('.Yii::app()->user->id.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
 	</div><!-- mainmenu -->
@@ -48,9 +55,9 @@
 	<div class="clear"></div>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
+		Copyright &copy; <?php echo date('Y'); ?> by JOHN PEREA - 3005503069.<br/>
 		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
+		
 	</div><!-- footer -->
 
 </div><!-- page -->

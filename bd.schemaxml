@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">opinio</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="categorias" view="colnames">
+<left>0</left>
+<top>0</top>
+<width>90</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `categorias` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="preguntas" view="colnames">
+<left>185</left>
+<top>9</top>
+<width>116</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `preguntas` (
+  `id` int(5) NOT NULL,
+  `texto` varchar(50) NOT NULL,
+  `id_categoria` int(5) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_preguntas` (`id_categoria`),
+  CONSTRAINT `FK_preguntas` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="puntos" view="colnames">
+<left>173</left>
+<top>187</top>
+<width>90</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `puntos` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="respuestas" view="colnames">
+<left>359</left>
+<top>6</top>
+<width>114</width>
+<height>158</height>
+<sql_create_table>CREATE TABLE `respuestas` (
+  `id` int(5) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `respuesta` varchar(50) NOT NULL,
+  `id_punto` int(5) NOT NULL,
+  `id_pregunta` int(5) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_respuestas-punto` (`id_punto`),
+  KEY `FK_respuestas-preguntas` (`id_pregunta`),
+  CONSTRAINT `FK_respuestas-preguntas` FOREIGN KEY (`id_pregunta`) REFERENCES `preguntas` (`id`),
+  CONSTRAINT `FK_respuestas-punto` FOREIGN KEY (`id_punto`) REFERENCES `puntos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="roles" view="colnames">
+<left>59</left>
+<top>323</top>
+<width>90</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `roles` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="usuarios" view="colnames">
+<left>347</left>
+<top>238</top>
+<width>109</width>
+<height>158</height>
+<sql_create_table>CREATE TABLE `usuarios` (
+  `nombre` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varbinary(50) NOT NULL,
+  `id_rol` int(5) NOT NULL,
+  `id_punto` int(5) DEFAULT NULL,
+  PRIMARY KEY (`username`),
+  KEY `FK_usuarios-roles` (`id_rol`),
+  KEY `FK_usuarios-puntos` (`id_punto`),
+  CONSTRAINT `FK_usuarios-puntos` FOREIGN KEY (`id_punto`) REFERENCES `puntos` (`id`),
+  CONSTRAINT `FK_usuarios-roles` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="formularios" view="colnames">
+<left>16</left>
+<top>142</top>
+<width>114</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `formularios` (
+  `id_punto` int(5) NOT NULL,
+  `id_pregunta` int(5) NOT NULL,
+  `texto` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_punto`,`id_pregunta`),
+  KEY `FK_formularios-preguntas` (`id_pregunta`),
+  CONSTRAINT `FK_formularios` FOREIGN KEY (`id_punto`) REFERENCES `puntos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>

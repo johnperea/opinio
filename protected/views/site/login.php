@@ -9,11 +9,10 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Login</h1>
-
-<p>Please fill out the following form with your login credentials:</p>
-
+<h4>Entra en el Panel de Control</h4>
 <div class="form">
+
+ 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
 	'enableClientValidation'=>true,
@@ -22,11 +21,10 @@ $this->breadcrumbs=array(
 	),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
+	
 	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username'); ?>
+		<?php echo $form->labelEx($model,'Tu Email', array('style'=>"large")); ?>
+		<?php echo $form->textField($model,'username', array('class'=>"title")); ?>
 		<?php echo $form->error($model,'username'); ?>
 	</div>
 
@@ -34,9 +32,7 @@ $this->breadcrumbs=array(
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
-		<p class="hint">
-			Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
-		</p>
+		
 	</div>
 
 	<div class="row rememberMe">
@@ -50,4 +46,7 @@ $this->breadcrumbs=array(
 	</div>
 
 <?php $this->endWidget(); ?>
+
+
+     
 </div><!-- form -->
